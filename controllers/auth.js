@@ -1,43 +1,66 @@
-const {request, response} = require('express');
-const { userQuery } = require('../database/users');
+const { request, response } = require('express');
+const { getUserQuery, insertUserQuery } = require('../database/users');
 
 
-const createUser = (req, res = response) => {
+const createUser = (req = request, res = response) => {
 
     let userData = req.body;
-    console.log(req.body);
+
+    const isValidated = validation(userData);
+
+    try {
+
+        if (!isValidated) {
+
+            console.log('La información proporcionada es nula')
+        } else {
+
+            console.log('La información ha sido validada');
+            console.log('Nuevo usuario registrado');
+            insertUserQuery(userData);
+
+        }
+
+    } catch (error) {
+
+        throw console.error(error);
+    }
 
     res.json({
         ok: true,
-        msg: 'register',
+        msg: 'New user registered.',
         user: userData
     });
 
 };
 
-const getUser = async (req, res = response) => {
+const onAuth = async (req = request, res = response) => {
 
-    const uid = req.query.uid;
-    const upass = req.query.upassword;
+    const {uEmail, uPassword} = req.body;
+
+    console.log(req.body)
 
     try {
 
-        const { user_id, user_password } = await userQuery(uid);
+        const { email, password, name } = await getUserQuery(uEmail);
 
-        if (uid === user_id && upass === user_password) {
+        console.log(email, password, name)
+
+        if (uEmail === email && uPassword === password) {
 
             const randomToken = (length = 24) => {
-    
+
                 return Math.random().toString(16).substring(2, length);
             };
-    
+
             res.send({
-                token: randomToken()
+                token: randomToken(),
+                username: name
             })
         }
 
     } catch (error) {
-        res.status(404).send('Sorry, can´t find that');
+        res.status(404).send(/* 'Sorry, can´t find that' */ + error);
     }
 
 }
@@ -51,8 +74,31 @@ const renewToken = (req, res = response) => {
 
 };
 
+const validation = (data) => {
+
+    const { email, name, address, phone, password } = data;
+
+    const userDataArray = [email, name, address, phone, password];
+
+    let isValidated;
+
+    for (let i = 0; i < userDataArray.length; i++) {
+
+        if (!userDataArray[i]) {
+
+            return isValidated = false;
+
+        } else {
+
+            isValidated = true;
+        }
+    };
+
+    return isValidated;
+}
+
 module.exports = {
     createUser,
-    getUser,
+    onAuth,
     renewToken
 }

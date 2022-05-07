@@ -3,16 +3,16 @@
     host + /api/auth
 
 */
-const { createUser, getUser, renewToken } = require('../controllers/auth');
+const { createUser, onAuth, renewToken } = require('../controllers/auth');
 
 
 const { Router } = require('express');
 const router = Router();
 
 
-router.post('/new', createUser);
+router.post('/register/new', createUser);
 
-router.get('/login', getUser)
+router.post('/login', onAuth)
 
 
 router.get('/renew', renewToken);
