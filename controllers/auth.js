@@ -36,7 +36,7 @@ const createUser = (req = request, res = response) => {
 
 const onAuth = async (req = request, res = response) => {
 
-    const {uEmail, uPassword} = req.body;
+    const { uEmail, uPassword } = req.body;
 
     console.log(req.body)
 
@@ -54,13 +54,27 @@ const onAuth = async (req = request, res = response) => {
             };
 
             res.send({
-                token: randomToken(),
-                username: name
+                ok: true,
+                message: 'User logged successfully',
+                loginData: {
+                    token: randomToken(),
+                    username: name
+                }
+            })
+        } else {
+            res.send({
+                ok: false,
+                message: 'Please check your login data',
+                loginData: {
+                    token: null,
+                    username: null
+                }
             })
         }
 
+
     } catch (error) {
-        res.status(404).send(/* 'Sorry, can´t find that' */ + error);
+        res.status(404).send(/* 'Sorry, can´t find that' + */ error);
     }
 
 }

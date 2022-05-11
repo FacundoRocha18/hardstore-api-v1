@@ -4,7 +4,13 @@ const getUserQuery = async (uEmail) => {
 
     const getUserQuery = `SELECT * FROM users WHERE email = '${uEmail}'`;
 
-    const [userData] = await database.query(getUserQuery).catch(err => { throw err });
+    let userData;
+    try {
+         [userData] = await database.query(getUserQuery).catch(err => { throw err });
+    } catch (error) {
+        return error;
+    }
+
 
     return userData;
 }
