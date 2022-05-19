@@ -15,9 +15,13 @@ app.use(cors());
 app.use('/api/auth', require('./routes/auth'));
 
 app.use('/api/products', require('./routes/products'));
+
+app.use('/api/cats', require('./routes/categories'));
+
 app.use('/', require('./routes/products'));
 
 
-app.listen( process.env.PORT2, () => {
-  console.log(`Server running at: http://localhost:${process.env.PORT2}`);
+
+app.listen( process.env.APIPORT, () => {
+  console.log(`Server running at: http://localhost:${process.env.APIPORT}`);
 })

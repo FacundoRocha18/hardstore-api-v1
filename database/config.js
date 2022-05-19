@@ -37,20 +37,7 @@ const addProduct = async(req = request, res = response) => {
 
 };
 
-const getProducts = async (req, res = response) => {
-
-    const getProductsQuery = 'SELECT * FROM `products`';
-
-    const productData = await database.query(getProductsQuery).catch(err => {throw err});
-
-    res.send({
-        data: productData
-    });
-    
-};
-
 module.exports = {
     database,
-    addProduct,
-    getProducts
+    addProduct
 }
