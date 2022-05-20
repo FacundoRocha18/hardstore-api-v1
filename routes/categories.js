@@ -1,6 +1,6 @@
 /* 
     Categories routes
-    host + /api/cats
+    host + /api/categories
 */
 const { getCats } = require('../database/categories');
 
