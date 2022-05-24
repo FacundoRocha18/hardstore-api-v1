@@ -1,14 +1,16 @@
 const { response, request } = require('express');
 const util = require("util"); 
 const mysql = require('mysql2');
+require('dotenv').config();
+
 
 /* Creating database connection */
 
 const database = new mysql.createConnection({
     host: 'localhost',
     port: 3307,
-    user: 'hardstore_admin',
-    password: 'montuysatet1810',
+    user: process.env.DATABASE_USER,
+    password: process.env.USER_PWD,
     database: 'hardstore_db'
 });
 
