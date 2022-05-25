@@ -1,4 +1,5 @@
 const { request, response } = require('express');
+const bcrypt = require('bcrypt');
 const { getUserQuery, insertUserQuery } = require('../database/users');
 
 
@@ -28,8 +29,7 @@ const createUser = (req = request, res = response) => {
 
     res.json({
         ok: true,
-        msg: 'New user registered.',
-        user: userData
+        msg: 'New user registered.'
     });
 
 };
@@ -38,16 +38,15 @@ const onAuth = async (req = request, res = response) => {
 
     const { uEmail, uPassword } = req.body;
 
-    console.log(req.body)
-
     try {
 
         const { email, password, name } = await getUserQuery(uEmail);
 
         console.log(email, password, name)
 
-        if (uEmail === email && uPassword === password) {
+        if (uEmail === email && await bcrypt.compare(uPassword, password)) {
 
+            console.log('ok')
             const randomToken = (length = 24) => {
 
                 return Math.random().toString(16).substring(2, length);
@@ -64,11 +63,7 @@ const onAuth = async (req = request, res = response) => {
         } else {
             res.send({
                 ok: false,
-                message: 'Please check your login data',
-                loginData: {
-                    token: null,
-                    username: null
-                }
+                message: 'Please check your password'
             })
         }
 

@@ -5,8 +5,8 @@
 */
 const { createUser, onAuth, renewToken } = require('../controllers/auth');
 
-
 const { Router } = require('express');
+
 const router = Router();
 
 
