@@ -63,7 +63,11 @@ const onAuth = async (req = request, res = response) => {
         } else {
             res.send({
                 ok: false,
-                message: 'Please check your password'
+                message: 'Please check your email or password',
+                loginData: {
+                    token: undefined,
+                    username: undefined
+                }
             })
         }
 
