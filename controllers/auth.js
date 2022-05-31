@@ -65,8 +65,8 @@ const onAuth = async (req = request, res = response) => {
                 ok: false,
                 message: 'Please check your email or password',
                 loginData: {
-                    token: undefined,
-                    username: undefined
+                    token: null,
+                    username: null
                 }
             })
         }
