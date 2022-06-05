@@ -40,9 +40,9 @@ const onAuth = async (req = request, res = response) => {
 
     try {
 
-        const { email, password, name } = await getUserQuery(uEmail);
+        const { email, password, full_name } = await getUserQuery(uEmail);
 
-        console.log(email, password, name)
+        console.log(email, password, full_name)
 
         if (uEmail === email && await bcrypt.compare(uPassword, password)) {
 
@@ -57,7 +57,7 @@ const onAuth = async (req = request, res = response) => {
                 message: 'User logged successfully',
                 loginData: {
                     token: randomToken(),
-                    username: name
+                    username: full_name
                 }
             })
         } else {

@@ -20,6 +20,7 @@ app.use('/api/products', require('./routes/products'));
 
 app.use('/api/categories', require('./routes/categories'));
 
+
 app.use('/', require('./routes/products'));
 
 

@@ -7,7 +7,6 @@ const getProducts = async () => {
 
     const products = await database.query(getProductsQuery).catch(err => {throw err});
 
-
     return products;
     
 };

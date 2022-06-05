@@ -7,8 +7,6 @@ const getCats = async () => {
 
     const categories = await database.query(getCatsQuery).catch(err => {throw err});
 
-    console.log(categories)
-
     return categories;
     
 };

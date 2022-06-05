@@ -3,13 +3,14 @@ const bcrypt = require('bcrypt');
 
 const getUserQuery = async (uEmail) => {
 
-    const getUserQuery = `SELECT * FROM users WHERE email = '${uEmail}'`;
+    const getUserQuery = `SELECT email, password, full_name FROM customers WHERE email = '${uEmail}'`;
 
     let userData;
     try {
         [userData] = await database.query(getUserQuery).catch(err => { throw err });
+        console.log(userData);
     } catch (error) {
-        return error;
+        return console.log('Ocurrió un error' + error);
     }
 
 
@@ -22,24 +23,24 @@ const insertUserQuery = async (userData) => {
 
     try {
         const hashedPwd = await bcrypt.hash(password, 10)
-        
-        const userEmailQuery = `SELECT email FROM users WHERE email = '${email}'`;
-    
-        const newUserQuery = `INSERT INTO users (email, name, address, phone, password) VALUES ('${email}', '${name}', '${address}', '${phone}', '${hashedPwd}')`;
-    
-        const [exist] = await database.query(userEmailQuery).catch(err => { throw err });
-        
-        if (exist) {
-    
-            throw alert('ya existe un usuario con ese email')
-    
+
+        const userEmailQuery = `SELECT email FROM customers WHERE email = '${email}'`;
+
+        const newUserQuery = `INSERT INTO customers (email, password, full_name, default_shipping_address, phone) VALUES ('${email}', '${hashedPwd}','${name}', '${address}', '${phone}')`;
+
+        const [exists] = await database.query(userEmailQuery).catch(err => { throw err });
+
+        if (exists) {
+
+            throw console.log('ya existe un usuario con ese email')
+
         } else {
-    
+
             database.query(newUserQuery).catch(err => { throw err })
-            return alert('Usuario ingresado con éxito');
+            return console.log('Usuario ingresado con éxito');
         }
     } catch (error) {
-
+        return console.log('Ocurrió un error' + error);
     }
 
 }
