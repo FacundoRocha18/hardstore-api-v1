@@ -42,8 +42,16 @@ const onAuth = async (req = request, res = response) => {
 
         const { email, password, full_name } = await getUserQuery(uEmail);
 
-        console.log(email, password, full_name)
-
+        if (!email) {
+            return res.send({
+                ok: false,
+                message: 'Please check your email',
+                loginData: {
+                    token: null,
+                    username: null
+                }
+            })
+        }
         if (uEmail === email && await bcrypt.compare(uPassword, password)) {
 
             console.log('ok')
@@ -63,7 +71,7 @@ const onAuth = async (req = request, res = response) => {
         } else {
             res.send({
                 ok: false,
-                message: 'Please check your email or password',
+                message: 'Please check your password',
                 loginData: {
                     token: null,
                     username: null
@@ -73,7 +81,14 @@ const onAuth = async (req = request, res = response) => {
 
 
     } catch (error) {
-        res.status(404).send(/* 'Sorry, can´t find that' + */ error);
+        return res.send({
+            ok: false,
+            message: 'Please check your email',
+            loginData: {
+                token: null,
+                username: null
+            }
+        })
     }
 
 }
