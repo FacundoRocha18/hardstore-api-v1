@@ -7,30 +7,33 @@ const createUser = (req = request, res = response) => {
 
     let userData = req.body;
 
-    const isValidated = validation(userData);
-
+    
     try {
-
+        const isValidated = validation(userData);
+        
         if (!isValidated) {
 
-            console.log('La información proporcionada es nula')
-        } else {
-
-            console.log('La información ha sido validada');
-            console.log('Nuevo usuario registrado');
-            insertUserQuery(userData);
-
+            return res.send({
+                ok: false,
+                message: 'La información proporcionada es inválida, por favor rellena todos los campos e intenta nuevamente.'
+            });
         }
+
+        insertUserQuery(userData);
+        res.send({
+            ok: true,
+            message: 'Nuevo usuario registrado con éxito.'
+        });
+
+
 
     } catch (error) {
 
-        throw console.error(error);
+        res.status(404)({
+            ok: false,
+            message: 'No pude encontrar lo solicitado.'
+        });
     }
-
-    res.json({
-        ok: true,
-        msg: 'New user registered.'
-    });
 
 };
 
@@ -42,6 +45,8 @@ const onAuth = async (req = request, res = response) => {
 
         const { email, password, full_name } = await getUserQuery(uEmail);
 
+        console.log(email)
+
         if (!email) {
             return res.send({
                 ok: false,
@@ -52,9 +57,9 @@ const onAuth = async (req = request, res = response) => {
                 }
             })
         }
+
         if (uEmail === email && await bcrypt.compare(uPassword, password)) {
 
-            console.log('ok')
             const randomToken = (length = 24) => {
 
                 return Math.random().toString(16).substring(2, length);
@@ -62,9 +67,9 @@ const onAuth = async (req = request, res = response) => {
 
             res.send({
                 ok: true,
-                message: 'User logged successfully',
+                message: `Inicio de sesión exitoso, bienvenido ${full_name}`,
                 loginData: {
-                    token: randomToken(),
+                    token: randomToken(30),
                     username: full_name
                 }
             })
@@ -74,7 +79,7 @@ const onAuth = async (req = request, res = response) => {
                 message: 'Please check your password',
                 loginData: {
                     token: null,
-                    username: null
+                    username: ''
                 }
             })
         }
@@ -83,10 +88,10 @@ const onAuth = async (req = request, res = response) => {
     } catch (error) {
         return res.send({
             ok: false,
-            message: 'Please check your email',
+            message: 'Please check your email or password and try again.',
             loginData: {
                 token: null,
-                username: null
+                username: ''
             }
         })
     }
