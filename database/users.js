@@ -1,18 +1,15 @@
 const { database } = require('../database/config')
 const bcrypt = require('bcrypt');
-const res = require('express/lib/response');
 
 const getUserQuery = async (uEmail) => {
 
     const getUserQuery = `SELECT email, password, full_name FROM customers WHERE email = '${uEmail}'`;
 
-    let message, userData;
+    let userData;
 
     try {
 
-        [userData] = await database.query(getUserQuery)
-            .catch(err => { throw err });
-
+        [userData] = await database.query(getUserQuery).catch(err => { throw err });
 
     } catch (error) {
 
@@ -20,7 +17,7 @@ const getUserQuery = async (uEmail) => {
     }
 
 
-    return userData, message;
+    return userData;
 }
 
 const insertUserQuery = async (userData) => {

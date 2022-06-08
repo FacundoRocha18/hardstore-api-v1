@@ -8,24 +8,23 @@ const createUser = (req = request, res = response) => {
     let userData = req.body;
 
     
-    try {
-        const isValidated = validation(userData);
-        
-        if (!isValidated) {
+    const isValidated = validation(userData);
+    
+    if (!isValidated) {
 
-            return res.send({
-                ok: false,
-                message: 'La información proporcionada es inválida, por favor rellena todos los campos e intenta nuevamente.'
-            });
-        }
+        return res.send({
+            ok: false,
+            message: 'La información proporcionada es inválida, por favor rellena todos los campos e intenta nuevamente.'
+        });
+    }
+
+    try {
 
         insertUserQuery(userData);
-        res.send({
+        return res.send({
             ok: true,
-            message: 'Nuevo usuario registrado con éxito.'
+            message: 'Nuevo usuario registrado con éxito. Ya puede iniciar sesión.'
         });
-
-
 
     } catch (error) {
 
@@ -44,8 +43,6 @@ const onAuth = async (req = request, res = response) => {
     try {
 
         const { email, password, full_name } = await getUserQuery(uEmail);
-
-        console.log(email)
 
         if (!email) {
             return res.send({
@@ -86,6 +83,7 @@ const onAuth = async (req = request, res = response) => {
 
 
     } catch (error) {
+        console.log(error);
         return res.send({
             ok: false,
             message: 'Please check your email or password and try again.',
