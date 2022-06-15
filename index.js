@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
+const cloudinary = require('cloudinary');
+require('dotenv').config('./.env.local');
 
 const app = express();
 
@@ -11,8 +12,14 @@ app.use(express.urlencoded({
 }));
 
 app.use(cors({
-  origin: 'http://192.168.1.8:4000'
+  origin: `http://${process.env.CLIENT_BASE_URL}:${process.env.CLIENT_PORT}`
 }))
+
+cloudinary.config({ 
+  cloud_name: 'dhqgqznbw', 
+  api_key: '818335363575158', 
+  api_secret: 'biK7v6mHxzMdJ398ebRqywEB3wo' 
+});
 
 app.use('/api/auth', require('./routes/auth'));
 
@@ -25,6 +32,6 @@ app.use('/', require('./routes/products'));
 
 
 
-app.listen(process.env.APIPORT, () => {
-  console.log(`Server running at: http://localhost:${process.env.APIPORT}`);
+app.listen(process.env.SERVER_PORT, process.env.SERVER_BASE_URL, () => {
+  console.log(`Server running at: http://${process.env.SERVER_BASE_URL}:${process.env.SERVER_PORT}`);
 })
