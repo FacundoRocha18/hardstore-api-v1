@@ -33,6 +33,6 @@ app.use('/', require('./routes/products'));
 
 
 
-app.listen(base_port, '0.0.0.0', () => {
-  console.log(`Server running at: http://${base_url}:${base_port}`);
+app.listen(server_port, '0.0.0.0', () => {
+  console.log(`Server running at: http://${server_url}:${server_port}`);
 })
