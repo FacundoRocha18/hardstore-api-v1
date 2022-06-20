@@ -2,6 +2,14 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.30.0",
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    "cloudinary-react": "^1.7.2",
+>>>>>>> parent of ebf1c81 (Removed Cloudinary depenndencie)
+=======
+    "cloudinary-react": "^1.7.2",
+>>>>>>> parent of ebf1c81 (Removed Cloudinary depenndencie)
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
