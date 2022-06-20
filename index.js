@@ -1,13 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const cloudinary = require('cloudinary');
-require('dotenv').config('./.env.local');
+require('dotenv').config();
 
 const app = express();
 
-const base_url = '206.246.74.221';
+const server_url =  process.env.HOST || '0.0.0.0' || '206.246.74.221';
 
-const base_port = 8080;
+const server_port = process.env.PORT || 8080;
 
 app.use(express.json());
 
