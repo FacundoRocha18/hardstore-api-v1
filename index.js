@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const cloudinary = require('cloudinary');
 require('dotenv').config();
 
 const app = express();
@@ -18,12 +17,6 @@ app.use(express.urlencoded({
 app.use(cors({
   origin: '*'
 }))
-
-cloudinary.config({ 
-  cloud_name: 'dhqgqznbw', 
-  api_key: '818335363575158', 
-  api_secret: 'biK7v6mHxzMdJ398ebRqywEB3wo' 
-});
 
 app.use('/api/auth', require('./routes/auth'));
 
