@@ -5,6 +5,10 @@ require('dotenv').config('./.env.local');
 
 const app = express();
 
+const base_url = '206.246.74.221';
+
+const base_port = 8080;
+
 app.use(express.json());
 
 app.use(express.urlencoded({
@@ -12,7 +16,7 @@ app.use(express.urlencoded({
 }));
 
 app.use(cors({
-  origin: `http://${process.env.CLIENT_BASE_URL}:${process.env.CLIENT_PORT}`
+  origin: '*'
 }))
 
 cloudinary.config({ 
@@ -27,11 +31,15 @@ app.use('/api/products', require('./routes/products'));
 
 app.use('/api/categories', require('./routes/categories'));
 
+app.get('/test', (req, res) => {
+	res.send('Hola mundo')
+})
+
 
 app.use('/', require('./routes/products'));
 
 
 
-app.listen(process.env.SERVER_PORT, process.env.SERVER_BASE_URL, () => {
-  console.log(`Server running at: http://${process.env.SERVER_BASE_URL}:${process.env.SERVER_PORT}`);
+app.listen(base_port, '0.0.0.0', () => {
+  console.log(`Server running at: http://${base_url}:${base_port}`);
 })

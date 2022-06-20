@@ -8,10 +8,10 @@ require('dotenv').config();
 
 const database = new mysql.createConnection({
     host: 'localhost',
-    port: 3307,
-    user: process.env.DATABASE_USER,
-    password: process.env.USER_PWD,
-    database: 'hardstore_db'
+    port: 3306,
+    user: 'hardstore_client',
+    password: 'HSClient54591334!',
+    database: 'hardstore__db'
 });
 
 // promise wrapper to enable async await with MYSQL
