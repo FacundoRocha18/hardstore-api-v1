@@ -4,9 +4,9 @@ require('dotenv').config();
 
 const app = express();
 
-const server_url =  'localhost';
+const server_url = 'localhost';
 
-const server_port = process.env.PORT || 8080;
+const server_port = process.env.PORT || 4000;
 
 app.use(express.json());
 
