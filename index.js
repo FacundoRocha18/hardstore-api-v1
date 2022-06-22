@@ -6,7 +6,7 @@ const app = express();
 
 const server_url = 'localhost';
 
-const server_port = process.env.PORT || 4000;
+const server_port = 4000;
 
 app.use(express.json());
 
