@@ -18,11 +18,11 @@ app.use(cors({
   origin: '*'
 }))
 
-app.use('/api/auth', require('./routes/auth'));
+app.post('/api/auth', require('./routes/auth'));
 
-app.use('/api/products', require('./routes/products'));
+app.get('/api/products', require('./routes/products'));
 
-app.use('/api/categories', require('./routes/categories'));
+app.get('/api/categories', require('./routes/categories'));
 
 app.get('/test', (req, res) => {
 	res.send('Hola mundo')
