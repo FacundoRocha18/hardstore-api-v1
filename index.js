@@ -18,7 +18,7 @@ app.use(cors({
   origin: '*'
 }))
 
-app.post('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./routes/auth'));
 
 app.get('/api/products', require('./routes/products'));
 
