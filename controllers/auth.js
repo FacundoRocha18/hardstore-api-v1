@@ -7,10 +7,7 @@ const createUser = (req = request, res = response) => {
 
     let userData = req.body;
 
-    
-    const isValidated = validation(userData);
-    
-    if (!isValidated) {
+    if (validation(userData)) {
 
         return res.send({
             ok: false,
@@ -40,8 +37,9 @@ const onAuth = async (req = request, res = response) => {
 
     const { uEmail, uPassword } = req.body;
 
-    try {
+    console.log(uEmail, uPassword)
 
+    try {
         const { email, password, full_name } = await getUserQuery(uEmail);
 
         if (!email) {
@@ -57,10 +55,7 @@ const onAuth = async (req = request, res = response) => {
 
         if (uEmail === email && await bcrypt.compare(uPassword, password)) {
 
-            const randomToken = (length = 24) => {
-
-                return Math.random().toString(16).substring(2, length);
-            };
+            const randomToken = (length = 24) => Math.random().toString(16).substring(2, length);
 
             res.send({
                 ok: true,
