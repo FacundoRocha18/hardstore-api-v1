@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 
 const getEmployee = async (id) => { 
     
-    const getData = `SELECT employee_id, name, employee_pin FROM employees WHERE employee_id = '${id}'`;
+    const getData = `SELECT name, employee_id, employee_pin FROM employees WHERE employee_id = '${id}'`;
 
     let data = [];
 

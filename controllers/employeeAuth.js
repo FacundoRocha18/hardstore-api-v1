@@ -10,7 +10,7 @@ const onLogin = async (req = request, res = response) => {
     const { id, pin } = req.body;
 
     try {
-        const { employee_id, name, employee_pin } = await getEmployee(id);
+        const { name, employee_id, employee_pin } = await getEmployee(id);
 
         console.log(employee_id, name, employee_pin)
 
