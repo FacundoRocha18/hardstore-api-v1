@@ -20,7 +20,7 @@ app.use(cors({
 
 app.use('/api/auth', require('./routes/auth'));
 
-app.get('/api/products', require('./routes/products'));
+app.use('/api/products', require('./routes/products'));
 
 app.get('/api/categories', require('./routes/categories'));
 

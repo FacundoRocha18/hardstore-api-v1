@@ -4,11 +4,8 @@
 */
 
 const { createProduct } = require('../controllers/products');
-
 const { getProducts } = require('../database/products');
 const { sendHomeData } = require('../controllers/homeData');
-
-
 
 const { Router } = require('express');
 const router = Router();
