@@ -8,6 +8,8 @@ const sendHomeData = async (req = request, res = response) => {
     const products = await getProducts();
     const categories = await getCats();
 
+    console.log(categories)
+
     res.send({
         ok: true,
         msg: 'Homepage Data',

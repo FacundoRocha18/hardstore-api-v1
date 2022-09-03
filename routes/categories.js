@@ -2,15 +2,12 @@
     Categories routes
     host + /api/categories
 */
-const { getCats } = require('../database/categories');
 
+const { getCategories } = require('../controllers/categories')
 
 const { Router } = require('express');
 const router = Router();
 
-router.get('/', getCats);
-
-
-
+router.use('/', getCategories);
 
 module.exports = router;
