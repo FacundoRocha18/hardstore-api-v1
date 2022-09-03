@@ -8,10 +8,10 @@ const server_url = 'localhost';
 
 const server_port = 8000;
 
-app.use(express.json());
-
+app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({
-  extended: true
+  extended: true,
+  limit: '25mb'
 }));
 
 app.use(cors({
@@ -25,7 +25,7 @@ app.use('/api/products', require('./routes/products'));
 app.get('/api/categories', require('./routes/categories'));
 
 app.get('/test', (req, res) => {
-	res.send('Hola mundo')
+  res.send('Hola mundo')
 })
 
 

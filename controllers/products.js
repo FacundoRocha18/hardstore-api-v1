@@ -5,10 +5,9 @@ const createProduct = async (req = request, res = response) => {
 
     const data = req.body;
 
-    const { name, sku } = data;
-    console.log(name, sku)
+    console.log(data)
 
-    if ( !data ) {
+    if (!data) {
         return res.send({
             ok: false,
             message: 'Los datos del producto están vacíos.'
@@ -16,6 +15,7 @@ const createProduct = async (req = request, res = response) => {
     }
 
     try {
+        newProduct(data)
         res.send({
             ok: true,
             message: 'Producto ingresado con éxito.'
