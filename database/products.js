@@ -13,9 +13,9 @@ const getProducts = async () => {
 
 const newProduct = async (data) => {
 
-    const { name, sku, qty, desc, img, price, cat } = data;
+    const { name, sku, qty, desc, img, price, cat_id, cat } = data;
 
-    const query = `INSERT INTO products (sku, product_name, product_image, product_price, product_description, product_stock, product_category_name) VALUES ('${sku}', '${name}', '${img}', '${price}', '${desc}', '${qty}', '${cat} ')`
+    const query = `INSERT INTO products (sku, product_name, product_image, product_price, product_description, product_stock, product_category_id, product_category_reference, product_category) VALUES ('${sku}', '${name}', '${img}', '${price}', '${desc}', '${qty}', '${cat_id} ', '${cat} ', '${cat} ')`
 
     const queryStatus = await database.query(query)
 
