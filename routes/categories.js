@@ -8,6 +8,6 @@ const { getCategories } = require('../controllers/categories')
 const { Router } = require('express');
 const router = Router();
 
-router.use('/', getCategories);
+router.get('/', getCategories);
 
 module.exports = router;
