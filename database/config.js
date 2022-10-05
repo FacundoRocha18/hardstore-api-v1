@@ -11,7 +11,7 @@ const database = new mysql.createConnection({
     port: process.env.DB_PORT || 3306,
     user: process.env.DB_USER || 'hardstore_client',
     password: process.env.DB_PWD || 'HSClient54591334!',
-    database: process.env.DB || 'hardstore__db'
+    database: process.env.DB || 'hardstore'
 });
 
 // promise wrapper to enable async await with MYSQL
