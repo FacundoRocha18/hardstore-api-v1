@@ -10,11 +10,14 @@ const { sendHomeData } = require('../controllers/homeData');
 const { Router } = require('express');
 const router = Router();
 
-router.get('/getproduct', getProducts);
+router.get('/getProducts', getProducts);
 
 router.post('/new', createProduct);
 
-
 router.get('/', sendHomeData);
+
+router.get('/test', (req, res) => {
+	res.send('Ruta funcional')
+});
 
 module.exports = router;

@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 const {database} = require('../database/config');
+
 const getProducts = async () => {
   const getProductsQuery = 'SELECT * FROM `products`';
 

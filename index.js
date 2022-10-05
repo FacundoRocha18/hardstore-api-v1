@@ -5,7 +5,7 @@ require('dotenv').config();
 const app = express();
 
 const serverUrl = 'localhost';
-const serverPort = 8000;
+const serverPort = 4000;
 
 app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({

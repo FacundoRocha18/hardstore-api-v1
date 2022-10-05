@@ -10,4 +10,8 @@ const router = Router();
 
 router.get('/', getCategories);
 
+router.get('/test', (req, res) => {
+	res.send('Ruta funcional')
+});
+
 module.exports = router;
