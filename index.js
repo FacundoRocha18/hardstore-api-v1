@@ -31,6 +31,10 @@ app.get('/test', (req, res) => {
 app.use('/', require('./routes/products'));
 
 
-app.listen(serverPort, serverUrl, () => {
-  console.log(`Server running at: http://${serverUrl}:${serverPort}`);
-});
+try {
+	app.listen(serverPort, serverUrl, () => {
+		console.log(`Server running at: http://${serverUrl}:${serverPort}`);
+	});
+} catch (error) {
+	console.log('Algo salio mal ' + error)
+}
