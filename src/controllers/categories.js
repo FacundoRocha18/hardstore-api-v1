@@ -6,8 +6,6 @@ const getCategories = async (req = request, res = response) => {
 
     const categories = await getCats();
 
-    console.log(categories)
-
     if (!categories) {
         return res.json({
             ok: false,

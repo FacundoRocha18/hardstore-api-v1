@@ -17,18 +17,18 @@ app.use(cors({
   origin: '*',
 }));
 
-app.use('/api/auth', require('./routes/auth'));
+app.use('/api/auth', require('./src/routes/auth'));
 
-app.use('/api/products', require('./routes/products'));
+app.use('/api/products', require('./src/routes/products'));
 
-app.use('/api/categories', require('./routes/categories'));
+app.use('/api/categories', require('./src/routes/categories'));
 
 app.get('/test', (req, res) => {
   res.send('Hola mundo');
 });
 
 
-app.use('/', require('./routes/products'));
+app.use('/', require('./src/routes/products'));
 
 
 try {

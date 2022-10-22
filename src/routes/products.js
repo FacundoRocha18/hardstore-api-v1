@@ -3,7 +3,7 @@
     host + /api/products
 */
 
-const { createProduct } = require('../controllers/products');
+const createProduct = require('../controllers/products');
 const { getProducts } = require('../database/products');
 const { sendHomeData } = require('../controllers/homeData');
 
