@@ -3,21 +3,18 @@ const util = require("util");
 const mysql = require('mysql2');
 require('dotenv').config();
 
-
 /* Creating database connection */
 
 const database = new mysql.createConnection({
     host: 'localhost',
-    port: process.env.DB_PORT || 3306,
-    user: process.env.DB_USER || 'hardstore_client',
-    password: process.env.DB_PWD || 'HSClient54591334!',
-    database: process.env.DB || 'hardstore'
+    port: 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+    database: process.env.DB
 });
 
 // promise wrapper to enable async await with MYSQL
 database.query = util.promisify(database.query).bind(database);
-
-
 
 const addProduct = async(req = request, res = response) => {
 
